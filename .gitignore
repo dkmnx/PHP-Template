@@ -1,2 +1,16 @@
 .env
 !.env.example
+
+# PHPUnit
+.phpunit.cache/
+phpunit.xml.dist
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
