@@ -50,6 +50,16 @@ class DatabaseTest extends TestCase
         $this->markTestIncomplete('Implement parameterized query support');
     }
 
+    public function testQueryPreventsSqlInjection()
+    {
+        // Mock a malicious input
+        $maliciousInput = "'; DROP TABLE users; --";
+
+        // With prepared statements, this should be treated as a literal string
+        // This test documents the security requirement
+        $this->markTestIncomplete('Add integration test with real database');
+    }
+
     public function testQueryReturnsEmptyArrayForNoResults()
     {
         // Skip if SQLite driver is not available
