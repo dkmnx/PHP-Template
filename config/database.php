@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 $config = [
     'host' => getenv('DB_HOST') ?: 'localhost',
     'name' => getenv('DB_NAME') ?: throw new RuntimeException('DB_NAME environment variable is required'),

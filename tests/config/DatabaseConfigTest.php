@@ -1,9 +1,39 @@
 <?php
 
+declare(strict_types=1);
+
+namespace Tests\Config;
+
 use PHPUnit\Framework\TestCase;
+use RuntimeException;
 
 class DatabaseConfigTest extends TestCase
 {
+    private array $originalEnv;
+
+    protected function setUp(): void
+    {
+        // Store original values
+        $this->originalEnv = [
+            'DB_HOST' => getenv('DB_HOST'),
+            'DB_NAME' => getenv('DB_NAME'),
+            'DB_USER' => getenv('DB_USER'),
+            'DB_PASS' => getenv('DB_PASS'),
+        ];
+    }
+
+    protected function tearDown(): void
+    {
+        // Restore original values
+        foreach ($this->originalEnv as $key => $value) {
+            if ($value === false) {
+                putenv($key); // Remove
+            } else {
+                putenv("$key=$value");
+            }
+        }
+    }
+
     public function testThrowsExceptionWhenDbNameNotSet()
     {
         putenv('DB_NAME');
