@@ -1,5 +1,5 @@
 <footer class="footer">
-    © <?= date('Y') ?> iQMS System
+    © <?= e(date('Y')) ?> iQMS System
 </footer>
 
 </body>

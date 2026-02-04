@@ -48,6 +48,27 @@ class HelpersTest extends TestCase
         $this->assertEquals('Hello 世界 🌍', $escaped);
     }
 
+    public function testActiveFunctionSanitizesInput()
+    {
+        $this->assertFunctionExists('active');
+
+        // Test that active() handles malicious input safely
+        $_SERVER['REQUEST_URI'] = '/safe-path';
+        $maliciousPath = '/safe-path<script>alert("XSS")</script>';
+
+        // Should not match because sanitized path won't equal the safe path
+        $result = active($maliciousPath);
+        $this->assertEquals('', $result);
+
+        // Test normal path still works
+        $result = active('/safe-path');
+        $this->assertEquals('active', $result);
+
+        // Test non-matching path
+        $result = active('/about');
+        $this->assertEquals('', $result);
+    }
+
     private function assertFunctionExists($function)
     {
         static $loaded = false;

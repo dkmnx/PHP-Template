@@ -23,7 +23,9 @@ function current_path()
 
 function active($path)
 {
-    return current_path() === $path ? 'active' : '';
+    $current = htmlspecialchars(current_path(), ENT_QUOTES, 'UTF-8');
+    $sanitizedPath = htmlspecialchars($path, ENT_QUOTES, 'UTF-8');
+    return $current === $sanitizedPath ? 'active' : '';
 }
 
 function json_response($status = 200, $data = [])

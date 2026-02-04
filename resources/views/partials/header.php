@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title><?= $title ?? 'App' ?></title>
+    <title><?= e($title ?? 'App') ?></title>
 </head>
 
 <body>
