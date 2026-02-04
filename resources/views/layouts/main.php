@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title><?= e($title ?? 'iQMS') ?></title>
+    <title><?= e($title ?? 'PHP-Template') ?></title>
     <link rel="stylesheet" href="/iQMS/public/assets/css/main.css">
 </head>
 
