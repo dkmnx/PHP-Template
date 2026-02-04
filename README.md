@@ -87,6 +87,33 @@ view('home', ['title' => 'Welcome']);
 
 This will load `resources/views/home.php` with the provided data.
 
+### Database Queries
+
+**SECURITY:** Always use prepared statements. Never concatenate user input into SQL.
+
+```php
+use App\Core\Database;
+
+// ✅ CORRECT - Use prepared statements
+$users = Database::query('SELECT * FROM users WHERE email = :email', [
+    ':email' => $userInput
+]);
+
+// Fetch a single record
+$user = Database::fetchOne('SELECT * FROM users WHERE id = :id', [
+    ':id' => $userId
+]);
+
+// Execute without returning data (INSERT, UPDATE, DELETE)
+Database::execute('INSERT INTO users (name, email) VALUES (:name, :email)', [
+    ':name' => 'John Doe',
+    ':email' => 'john@example.com'
+]);
+
+// ❌ WRONG - Never do this (SQL Injection risk!)
+$users = Database::query("SELECT * FROM users WHERE email = '$userInput'");
+```
+
 ### Helper Functions
 
 - `view($path, $data = [])`: Render a view template

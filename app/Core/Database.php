@@ -28,8 +28,23 @@ class Database
         return self::$pdo;
     }
 
-    public static function query($sql)
+    public static function query($sql, $params = [])
     {
-        return self::connect()->query($sql)->fetchAll(PDO::FETCH_ASSOC);
+        $stmt = self::connect()->prepare($sql);
+        $stmt->execute($params);
+        return $stmt->fetchAll();
+    }
+
+    public static function execute($sql, $params = [])
+    {
+        $stmt = self::connect()->prepare($sql);
+        return $stmt->execute($params);
+    }
+
+    public static function fetchOne($sql, $params = [])
+    {
+        $stmt = self::connect()->prepare($sql);
+        $stmt->execute($params);
+        return $stmt->fetch();
     }
 }

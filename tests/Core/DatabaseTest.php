@@ -39,4 +39,55 @@ class DatabaseTest extends TestCase
             'PDO constructor should include 4th parameter for options array'
         );
     }
+
+    public function testQueryAcceptsParameterArray()
+    {
+        $this->markTestIncomplete('Implement parameterized query support');
+    }
+
+    public function testQueryWithPositionalParameters()
+    {
+        $this->markTestIncomplete('Implement parameterized query support');
+    }
+
+    public function testQueryReturnsEmptyArrayForNoResults()
+    {
+        // Skip if SQLite driver is not available
+        if (!in_array('sqlite', PDO::getAvailableDrivers())) {
+            $this->markTestSkipped('SQLite PDO driver not available');
+        }
+
+        $pdo = new PDO('sqlite::memory:');
+        $reflection = new \ReflectionClass(Database::class);
+        $property = $reflection->getProperty('pdo');
+        $property->setAccessible(true);
+        $property->setValue($pdo);
+
+        $result = Database::query("SELECT name FROM sqlite_master WHERE type='table'");
+        $this->assertIsArray($result);
+    }
+
+    public function testPrepareBindAndExecuteWorks()
+    {
+        // Skip if SQLite driver is not available
+        if (!in_array('sqlite', PDO::getAvailableDrivers())) {
+            $this->markTestSkipped('SQLite PDO driver not available');
+        }
+
+        $pdo = new PDO('sqlite::memory:');
+        $pdo->exec('CREATE TABLE test (id INTEGER, name TEXT)');
+
+        $reflection = new \ReflectionClass(Database::class);
+        $property = $reflection->getProperty('pdo');
+        $property->setAccessible(true);
+        $property->setValue($pdo);
+
+        Database::execute('INSERT INTO test (id, name) VALUES (:id, :name)', [
+            ':id' => 1,
+            ':name' => 'Test User'
+        ]);
+
+        $result = Database::fetchOne('SELECT * FROM test WHERE id = :id', [':id' => 1]);
+        $this->assertEquals(['id' => 1, 'name' => 'Test User'], $result);
+    }
 }
