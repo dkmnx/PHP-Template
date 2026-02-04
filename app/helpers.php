@@ -1,5 +1,10 @@
 <?php
 
+function e($string)
+{
+    return htmlspecialchars($string ?? '', ENT_QUOTES | ENT_HTML5, 'UTF-8');
+}
+
 function view($path, $data = [])
 {
     extract($data);

@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title><?= $title ?? 'iQMS' ?></title>
+    <title><?= e($title ?? 'iQMS') ?></title>
     <link rel="stylesheet" href="/iQMS/public/assets/css/main.css">
 </head>
 
@@ -15,7 +15,7 @@
         <?php require __DIR__ . '/../partials/navbar.php'; ?>
 
         <main class="content">
-            <?= $content ?>
+            <?= e($content) ?>
         </main>
 
         <?php require __DIR__ . '/../partials/footer.php'; ?>
