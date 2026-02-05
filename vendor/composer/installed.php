@@ -3,7 +3,7 @@
         'name' => 'company/iqms',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => '4ed8bdc49369fb02353f55c50b12879a58814848',
+        'reference' => '57253720ddb15dea463aa4d2ec357269135d81d2',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -13,7 +13,7 @@
         'company/iqms' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => '4ed8bdc49369fb02353f55c50b12879a58814848',
+            'reference' => '57253720ddb15dea463aa4d2ec357269135d81d2',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
