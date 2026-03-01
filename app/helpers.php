@@ -16,6 +16,15 @@ function current_path()
     return parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 }
 
+function base_url($path = '')
+{
+    $config = require __DIR__ . '/../config/app.php';
+    $baseUrl = rtrim($config['base_url'], '/');
+    $path = ltrim($path, '/');
+
+    return $baseUrl . '/' . $path;
+}
+
 function active($path)
 {
     return current_path() === $path ? 'active' : '';

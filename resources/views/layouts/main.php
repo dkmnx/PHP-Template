@@ -3,7 +3,7 @@
 
 <head>
     <title><?= $title ?? 'iQMS' ?></title>
-    <link rel="stylesheet" href="/iQMS/public/assets/css/main.css">
+    <link rel="stylesheet" href="<?= base_url('public/assets/css/main.css') ?>">
 </head>
 
 <body>
